@@ -1,15 +1,21 @@
 import torch
 import os
-import kagglehub
+from datasets import load_dataset
 from clip import CLIP, CLIPLoss
 from data_loader import get_data_loader
 from vision_transformer import VisionTransformer
 from text_transformer import TextTransformer
+from utils import dataset_summary
 
-# Training configuration
-original_path = kagglehub.dataset_download("adityajn105/flickr30k")
-images_dir = os.path.join(os.path.dirname(__file__), '..', 'test_images')
-captions_file = os.path.join(os.path.dirname(__file__), '..', 'test_captions.txt')
+raw_data = load_dataset("nlphuji/flickr30k")
+
+print(original_path)
+images_dir = os.path.join(original_path, 'Images')
+captions_file = os.path.join(original_path, 'captions.txt')
+
+#dataset_summary(images_dir, captions_file)
+
+'''
 batch_size = 32
 num_workers = 2
 num_epochs = 10
@@ -49,5 +55,5 @@ def train():
         print(f"Epoch {epoch+1}/{num_epochs}, Loss: {total_loss/len(train_loader):.4f}")
 
 if __name__ == "__main__":
-    print_first_10_pairs()
-    train()
+    dataset_summary(images_dir, captions_file)
+'''

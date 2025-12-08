@@ -22,12 +22,10 @@ class Flickr30kDataset(Dataset):
         self.max_length = max_length
         self.image_files = []
         self.captions = []
-        # Discover images recursively
         exts = ['*.jpg', '*.jpeg', '*.png']
         for ext in exts:
             self.image_files += glob.glob(os.path.join(image_dir, '**', ext), recursive=True)
         self.image_files = sorted(set(self.image_files))
-        # Load captions
         self.caption_dict = {}
         with open(captions_file, 'r', encoding='utf-8') as f:
             for line in f:
@@ -35,13 +33,13 @@ class Flickr30kDataset(Dataset):
                 if len(parts) == 2:
                     img, caption = parts
                     self.caption_dict[img] = caption
-        # Match images to captions
+
         self.paired = []
         for img_path in self.image_files:
             img_name = os.path.basename(img_path)
             if img_name in self.caption_dict:
                 self.paired.append((img_path, self.caption_dict[img_name]))
-        # Reduce dataset size if requested
+
         if max_samples is not None and len(self.paired) > max_samples:
             self.paired = self.paired[:max_samples]
 
