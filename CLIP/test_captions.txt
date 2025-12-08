@@ -1,0 +1,2 @@
+dummy1.png	A test caption for dummy image 1.
+dummy2.png	A test caption for dummy image 2.
