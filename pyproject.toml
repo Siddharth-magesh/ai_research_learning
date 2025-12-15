@@ -9,8 +9,14 @@ dependencies = [
     "kagglehub>=0.3.13",
     "matplotlib>=3.10.7",
     "numpy>=2.3.5",
+    "optuna>=4.1.0",
+    "pillow>=11.1.0",
+    "scikit-learn>=1.6.1",
+    "tensorboard>=2.18.0",
     "torch>=2.5.0",
+    "torchinfo>=1.8.0",
     "torchvision>=0.20.0",
+    "tqdm>=4.67.1",
 ]
 
 # --- UV CONFIG FOR PYTORCH CUDA 12.6 ---
