@@ -31,12 +31,12 @@ def objective(trial):
     """
     config = Config()
 
-    image_size_options = [64, 96, 128]
+    image_size_options = [128, 224, 224]
     image_size = trial.suggest_categorical('image_size', image_size_options)
     config.image_size = (image_size, image_size)
     
-    config.embedding_dim = trial.suggest_categorical('embedding_dim', [32, 64, 128])
-    config.batch_size = trial.suggest_categorical('batch_size', [4, 8, 16])
+    config.embedding_dim = trial.suggest_categorical('embedding_dim', [64, 128, 256])
+    config.batch_size = trial.suggest_categorical('batch_size', [16, 32, 64])
 
     config.learning_rate = trial.suggest_float('learning_rate', 1e-4, 1e-2, log=True)
     config.weight_decay = trial.suggest_float('weight_decay', 1e-5, 1e-3, log=True)
@@ -45,8 +45,8 @@ def objective(trial):
     config.scheduler_gamma = trial.suggest_float('scheduler_gamma', 0.3, 0.7)
     
     # Fixed for optuna (lightweight)
-    config.num_epochs = 2
-    config.triplets_per_user = 10
+    config.num_epochs = 10
+    config.triplets_per_user = 100
     
     device = torch.device(config.device)
     
@@ -179,4 +179,4 @@ def run_optuna_study(n_trials=20, study_name='siamese_optimization'):
 
 if __name__ == "__main__":
     # Run optimization with 20 trials (adjust as needed)
-    run_optuna_study(n_trials=2)
+    run_optuna_study(n_trials=20)

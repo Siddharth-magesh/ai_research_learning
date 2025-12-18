@@ -1,12 +1,12 @@
 Best Hyperparameters from Optuna Study
 ============================================================
 
-Best Validation Accuracy: 0.5318
+Best Validation Accuracy: 0.5986
 
-image_size = 128
-embedding_dim = 32
-batch_size = 4
-learning_rate = 0.006066417876484235
-weight_decay = 0.00010454567981551968
-triplet_margin = 1.3900895506025566
-scheduler_gamma = 0.3366250983293157
+image_size = 224
+embedding_dim = 256
+batch_size = 32
+learning_rate = 0.0009727620885598844
+weight_decay = 0.00017682347633830915
+triplet_margin = 0.6835659364927866
+scheduler_gamma = 0.39529663804858883

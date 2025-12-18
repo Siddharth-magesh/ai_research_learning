@@ -18,20 +18,20 @@ class Config:
     """
     
     # Dataset Configuration
-    triplets_per_user: int = 20  # Lightweight: 20, Optimal: 100-200
+    triplets_per_user: int = 100  # Lightweight: 20, Optimal: 100-200
     train_split: float = 0.8
     
     # Image Configuration
-    image_size: Tuple[int, int] = (128, 128)  # Lightweight: (128,128), Optimal: (224,224)
+    image_size: Tuple[int, int] = (224, 224)  # Lightweight: (128,128), Optimal: (224,224)
     image_mean: Tuple[float, float, float] = (0.861, 0.861, 0.861)
     image_std: Tuple[float, float, float] = (0.274, 0.274, 0.274)
     
     # Model Architecture
-    embedding_dim: int = 64  # Lightweight: 64, Optimal: 128-256
+    embedding_dim: int = 128  # Lightweight: 64, Optimal: 128-256
     
     # Training Hyperparameters
-    batch_size: int = 8  # Lightweight: 8, Optimal: 32-64
-    num_epochs: int = 3  # Lightweight: 3, Optimal: 20-50
+    batch_size: int = 32  # Lightweight: 8, Optimal: 32-64
+    num_epochs: int = 20  # Lightweight: 3, Optimal: 20-50
     learning_rate: float = 1e-3  # Optimal: 1e-3 to 1e-4
     weight_decay: float = 1e-4  # L2 regularization
     
@@ -40,14 +40,14 @@ class Config:
     triplet_p: int = 2  # L2 distance
     
     # Learning Rate Scheduler
-    scheduler_step_size: int = 2  # Lightweight: 2, Optimal: 5-10
+    scheduler_step_size: int = 5  # Lightweight: 2, Optimal: 5-10
     scheduler_gamma: float = 0.5  # Optimal: 0.5-0.7
     
     # Evaluation
     threshold_distance: float = 0.8  # Distance threshold for verification
     
     # Data Loading
-    num_workers: int = 2  # Lightweight: 2, Optimal: 4-8
+    num_workers: int = 4  # Lightweight: 2, Optimal: 4-8
     pin_memory: bool = True if torch.cuda.is_available() else False
     
     # Checkpointing
