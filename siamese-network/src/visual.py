@@ -17,13 +17,15 @@ from data_loader import download_and_setup_data, create_data_loaders
 from evaluate import Evaluator
 
 
-def load_checkpoint(checkpoint_path='checkpoints/best_model.pth'):
+def load_checkpoint(checkpoint_path='/siamese-network/checkpoints/best_model.pth'):
     """Load trained model checkpoint."""
-    checkpoint = torch.load(checkpoint_path, map_location='cpu')
+    # Register safe globals for PyTorch 2.6+ compatibility
+    torch.serialization.add_safe_globals([Config])
+    checkpoint = torch.load(checkpoint_path, map_location='cuda', weights_only=False)
     return checkpoint
 
 
-def plot_training_curves(checkpoint_path='checkpoints/best_model.pth', 
+def plot_training_curves(checkpoint_path='/siamese-network/checkpoints/best_model.pth', 
                         save_dir='visualizations'):
     """
     Plot training and validation curves from checkpoint.
@@ -77,7 +79,7 @@ def plot_training_curves(checkpoint_path='checkpoints/best_model.pth',
     plt.show()
 
 
-def plot_evaluation_results(config=None, checkpoint_path='checkpoints/best_model.pth',
+def plot_evaluation_results(config=None, checkpoint_path='/siamese-network/checkpoints/best_model.pth',
                            save_dir='visualizations'):
     """
     Generate evaluation plots.
@@ -200,7 +202,7 @@ def plot_evaluation_results(config=None, checkpoint_path='checkpoints/best_model
         plt.show()
 
 
-def visualize_all(config=None, checkpoint_path='checkpoints/best_model.pth'):
+def visualize_all(config=None, checkpoint_path='/siamese-network/checkpoints/best_model.pth'):
     """
     Generate all visualizations.
     

@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+
+# Data
+data/
+*.pth
+*.pt
+
+# Optuna
+*.db
+*.db-journal
+
+# Results (optional - uncomment if you want to track results)
+# results/*.png
+# results/*.json
+# results/*.csv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
