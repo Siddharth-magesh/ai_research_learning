@@ -19,6 +19,7 @@ class Config:
     mlp_ratio: float = 4.0
     dropout: float = 0.1
     output_dim: int = 512
+    vision_dropout: float = 0.1
 
     # Text Transformer settings
     vocab_size: int = 49408

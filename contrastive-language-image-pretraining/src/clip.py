@@ -24,7 +24,9 @@ class CLIP(nn.Module):
         text_heads = config.text_num_heads,
         text_depth = config.text_depth,
         output_dim = config.text_output_dim,
-        temperature = config.temperature
+        temperature = config.temperature,
+        vision_dropout = config.vision_dropout,
+        text_dropout = config.text_dropout
     ):
         super(CLIP, self).__init__()
         self.visual = VisionTransformer(
@@ -33,7 +35,8 @@ class CLIP(nn.Module):
             embed_dim=vision_embed_dim,
             depth=vision_depth,
             num_heads=vision_heads,
-            output_dim=output_dim
+            output_dim=output_dim,
+            dropout=vision_dropout
         )
         self.text = TextTransformer(
             vocab_size=vocab_size,
@@ -41,7 +44,8 @@ class CLIP(nn.Module):
             max_len=max_len,
             num_heads=text_heads,
             depth=text_depth,
-            output_dim=output_dim
+            output_dim=output_dim,
+            dropout=text_dropout
         )
         self.temperature = nn.Parameter(torch.ones([]) * np.log(1 / temperature))
 
