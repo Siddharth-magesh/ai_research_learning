@@ -1,0 +1,15 @@
+embeddings {
+  tensor_name: "Sample_Embeddings:00000"
+  metadata_path: "00000/Sample_Embeddings\\metadata.tsv"
+  tensor_path: "00000/Sample_Embeddings\\tensors.tsv"
+}
+embeddings {
+  tensor_name: "Embeddings_with_Images:00000"
+  metadata_path: "00000/Embeddings_with_Images\\metadata.tsv"
+  sprite {
+    image_path: "00000/Embeddings_with_Images\\sprite.png"
+    single_image_dim: 32
+    single_image_dim: 32
+  }
+  tensor_path: "00000/Embeddings_with_Images\\tensors.tsv"
+}
