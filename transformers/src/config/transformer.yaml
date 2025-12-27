@@ -1,0 +1,24 @@
+model:
+  name: transformer
+  type: encoder_decoder
+
+  vocab_size: 32000
+  max_seq_len: 512
+  embedding_dim: 512
+  num_layers: 6
+  num_heads: 8
+  head_dim: 64 # embeding_dim / num_heads
+  dropout: 0.1
+
+  ffn:
+    hidden_dim: 2048 # 4 * embedding_dim
+    activation: gelu
+
+  normalization:
+    type: layer_norm
+    eps: 1e-6
+
+  positional_encoding:
+    type: sinusoidal
+  
+  weight_tying: true # share input/output embeddings

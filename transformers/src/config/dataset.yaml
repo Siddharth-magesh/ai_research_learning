@@ -1,0 +1,19 @@
+dataset:
+  name: huggingface
+  dataset_id: wikitext
+  subset: wikitext-2-raw-v1
+
+  text_field: text_field
+
+  tokenizer:
+    type: bpe
+    pretrained: true
+    tokenizer_name: gpt2
+
+  preprocessing:
+    lowercase: false
+    remove_special_characters: false
+
+  sequence_length: 128
+  padding: true
+  truncation: true
