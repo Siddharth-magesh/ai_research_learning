@@ -11,4 +11,3 @@ class BaseConfig:
     num_workers: int = os.cpu.count()
     log_interval: int = 100
     save_interval: int = 1
-    

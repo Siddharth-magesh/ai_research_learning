@@ -1,0 +1,88 @@
+experiment:
+  name: baseline_transformer
+  description: Standard Transformer configuration as baseline
+  tags: [baseline, encoder-decoder]
+
+model:
+  name: transformer
+  type: encoder_decoder
+  vocab_size: 32000
+  max_seq_len: 512
+  embedding_dim: 512
+  num_layers: 6
+  num_heads: 8
+  head_dim: 64
+  dropout: 0.1
+  
+  ffn:
+    hidden_dim: 2048
+    activation: gelu
+  
+  normalization:
+    type: layer_norm
+    eps: 1e-6
+  
+  positional_encoding:
+    type: sinusoidal
+  
+  weight_tying: true
+
+dataset:
+  name: wikitext
+  subset: wikitext-2-raw-v1
+  text_field: text
+  sequence_length: 128
+  padding: true
+  truncation: true
+  
+  tokenizer:
+    type: bpe
+    pretrained: true
+    tokenizer_name: gpt2
+  
+  preprocessing:
+    lowercase: false
+    remove_special_characters: false
+
+training:
+  epochs: 10
+  batch_size: 32
+  gradient_accumulation_steps: 1
+  num_workers: 4
+  
+  optimizer:
+    type: adamw
+    lr: 3e-4
+    betas: [0.9, 0.98]
+    eps: 1e-8
+    weight_decay: 0.01
+  
+  scheduler:
+    type: linear_warmup
+    warmup_steps: 4000
+  
+  loss:
+    type: cross_entropy
+    ignore_index: -100
+    label_smoothing: 0.0
+  
+  mixed_precision: false
+  gradient_clipping: 1.0
+  
+  checkpointing:
+    save_dir: ./experiments/exp_001_baseline/checkpoints/
+    save_best_only: true
+    save_interval: 1
+  
+  logging:
+    log_interval: 100
+    log_dir: ./experiments/exp_001_baseline/logs/
+
+validation:
+  frequency: 1
+  metric: loss
+  
+evaluation:
+  metrics: [loss, accuracy, perplexity]
+  
+seed: 42

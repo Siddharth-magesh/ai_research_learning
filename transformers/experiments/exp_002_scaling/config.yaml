@@ -1,0 +1,89 @@
+experiment:
+  name: scaling_study
+  description: Larger model to study scaling behavior
+  tags: [scaling, large-model]
+
+model:
+  name: transformer
+  type: encoder_decoder
+  vocab_size: 32000
+  max_seq_len: 512
+  embedding_dim: 768
+  num_layers: 12
+  num_heads: 12
+  head_dim: 64
+  dropout: 0.15
+  
+  ffn:
+    hidden_dim: 3072
+    activation: gelu
+  
+  normalization:
+    type: layer_norm
+    eps: 1e-6
+  
+  positional_encoding:
+    type: sinusoidal
+  
+  weight_tying: true
+
+dataset:
+  name: wikitext
+  subset: wikitext-103-raw-v1
+  text_field: text
+  sequence_length: 256
+  padding: true
+  truncation: true
+  
+  tokenizer:
+    type: bpe
+    pretrained: true
+    tokenizer_name: gpt2
+  
+  preprocessing:
+    lowercase: false
+    remove_special_characters: false
+
+training:
+  epochs: 20
+  batch_size: 16
+  gradient_accumulation_steps: 4
+  num_workers: 8
+  
+  optimizer:
+    type: adamw
+    lr: 2e-4
+    betas: [0.9, 0.999]
+    eps: 1e-8
+    weight_decay: 0.05
+  
+  scheduler:
+    type: cosine
+    warmup_steps: 8000
+    num_cycles: 0.5
+  
+  loss:
+    type: cross_entropy
+    ignore_index: -100
+    label_smoothing: 0.1
+  
+  mixed_precision: true
+  gradient_clipping: 1.0
+  
+  checkpointing:
+    save_dir: ./experiments/exp_002_scaling/checkpoints/
+    save_best_only: true
+    save_interval: 2
+  
+  logging:
+    log_interval: 50
+    log_dir: ./experiments/exp_002_scaling/logs/
+
+validation:
+  frequency: 1
+  metric: perplexity
+  
+evaluation:
+  metrics: [loss, accuracy, perplexity]
+  
+seed: 42

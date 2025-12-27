@@ -12,6 +12,7 @@ dependencies = [
     "numpy>=2.3.5",
     "optuna>=4.1.0",
     "pillow>=11.1.0",
+    "pytest>=9.0.2",
     "scikit-learn>=1.6.1",
     "tensorboard>=2.18.0",
     "torch>=2.5.0",

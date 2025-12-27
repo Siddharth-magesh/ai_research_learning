@@ -36,9 +36,9 @@ class MultiHeadAttention(nn.Module):
 
     def forward(self, x: torch.Tensor, mask: torch.Tensor = None) -> torch.Tensor:
         B, T, D = x.size()
-        Q = self.q_proj(x)
-        K = self.k_proj(x)
-        V = self.v_proj(x)
+        Q = self.q_linear(x)
+        K = self.k_linear(x)
+        V = self.v_linear(x)
         Q = Q.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
         K = K.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
         V = V.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
